@@ -14,14 +14,11 @@ public class MenuUIHandler : MonoBehaviour
 
     public void Exit()
     {
-        if (Application.isEditor)
-        {
+#if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
-        }
-        else
-        {
+#else
             Application.Quit();
-        }
+#endif
     }
 
     public void StartRealGame()

@@ -21,10 +21,8 @@ public class Cell : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         //Проверяем с помощью условного оператора была ли клетка проверена
-        if (isChecked)
-        {
+        if (isChecked || GamePlayController.Instance.isOver)
             return;
-        }
 
         //Запоминаем, что клетка была проверена
         isChecked = true;
@@ -37,7 +35,8 @@ public class Cell : MonoBehaviour, IPointerClickHandler
         GameplayEvents.onCellChecked.Invoke(this, touchedPlayer.team);
 
         chosenImage.gameObject.SetActive(true);
-        chosenImage.sprite = MainManager.Instance.teamsToCharacters[touchedPlayer.team].photo;
+        chosenImage.sprite =
+            MainManager.Instance.teamsToCharacters[touchedPlayer.team].photo;
 
         //Переключаемся между игровыми объектами
         //switch (touchedPlayer.team)

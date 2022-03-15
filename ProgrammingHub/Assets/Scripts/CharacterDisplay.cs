@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using TextField = TMPro.TextMeshProUGUI;
+
 public class CharacterDisplay : MonoBehaviour
 {
     public List<CharacterCard> characterCards;
-    public Text nameText;
+    public TextField nameText;
     public Image playerPhoto;
 
     public Button next;
     public Button previous;
+
 
     //Какая команда выбирает игрока, с помощью этого экземпляра.
     public Player.Teams team;
@@ -34,7 +37,7 @@ public class CharacterDisplay : MonoBehaviour
 
     }
     //атрибут переменной 
-    [HideInInspector] 
+    //[HideInInspector] 
     public CharacterCard displayedCard;
     public void OnClickNext()
     {

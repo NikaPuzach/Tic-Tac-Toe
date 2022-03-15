@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/YourHero.unity
     guid: bc3115bdf0ae34b188edf1decd9ab89e
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/PlayGround.unity
+    guid: e124b73e5ed2a48c3bad9c538d50176b
   m_configObjects: {}

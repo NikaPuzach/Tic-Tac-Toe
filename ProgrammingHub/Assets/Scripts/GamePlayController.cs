@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using TextField = TMPro.TextMeshProUGUI;
+
 public partial class GamePlayController : MonoBehaviour
 {
     public GameObject finishScreen;
-    public Text winnerText;
+    public TextField winnerText;
     public Button restart;
     public Button backToMenu;
-    
+    public bool isOver = false;
 
     //Свойство для пробуждения того или иного объекта
     public static GamePlayController Instance { get; private set; }
@@ -23,8 +25,8 @@ public partial class GamePlayController : MonoBehaviour
         //Ссылка на свойство
         Instance = this;
 
-        //Выбор персонажа с нулевым индексом
-        ChoosePlayer(players[0]);
+        //Выбор персонажа с рандомным индексом
+        ChoosePlayer(players[Random.Range(0,2)]);
 
         //Кешируем ссылки на ячейки (в табле)
         cells = new Cell[,]
@@ -69,7 +71,6 @@ public partial class GamePlayController : MonoBehaviour
     {
         if (CheckGameOver(out var winner))
         {
-            //Вообще можно загрузить компонент, что человек выиграл/проиграл и возврат в главное меню/рестарт игры
             //SceneManager.LoadScene(0);
             if (winner == null)
             {
@@ -83,7 +84,8 @@ public partial class GamePlayController : MonoBehaviour
                 //поздравление - рестарт, возврат в главное меню
             }
 
-            finishScreen.SetActive(true);
+            isOver = true;
+            StartCoroutine(ShowFinishScreen());
 
         }
         else
@@ -103,6 +105,12 @@ public partial class GamePlayController : MonoBehaviour
             //Выбираем игрока с определенным индексом, который указали выше
             ChoosePlayer(players[index]);
         }
+    }
+
+    IEnumerator ShowFinishScreen()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        finishScreen.SetActive(true);
     }
 
     private void OnDestroy()
